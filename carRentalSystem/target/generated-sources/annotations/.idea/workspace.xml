@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="17413dd8-1ed6-4875-8d32-edd98ac9d060" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/CarType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Rentals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Reservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/java/com/example/carRentalSystemProject/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../carRentalSystemProject/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="2R2C9ouQDjYddQcu7Pdd22IPYJz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/efulala/Desktop/carRentalSystem/target/generated-sources/annotations",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17413dd8-1ed6-4875-8d32-edd98ac9d060" name="Changes" comment="" />
+      <created>1686438640189</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686438640189</updated>
+      <workItem from="1686438644644" duration="19000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
