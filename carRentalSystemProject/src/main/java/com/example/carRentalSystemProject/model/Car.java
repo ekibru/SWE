@@ -13,6 +13,7 @@ public class Car {
     private String available;
     @ManyToOne
     private CarType carType;
+
     public Car(){}
     public Car(String available, CarType carType) {
         this.available = available;
