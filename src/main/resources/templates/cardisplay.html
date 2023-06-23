@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Display</title>
+    <style>
+        body{
+            height: 300px;
+        }
+        #carList {
+            list-style-type: none;
+        }
+        .carItem {
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: block; /* Display items horizontally */
+            padding: 10px 20px;
+            background-color: lightcyan;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            transition-duration: 0.3s;
+        }
+        .carItem:hover {
+            background-color: lightblue; /* Add hover effect */
+        }
+        .carItem.selected {
+            background-color: yellow;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.3/cerulean/bootstrap.min.css"
+          integrity="sha512-CVn5BJ6vue0EG9CDO6yfg3hOvzQ43xEXOSUEkUtiV3pDy2S7O0saUZ0vbDkZYVX30NvqLLZo51JBzUyreGyqvg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<header th:replace="public/fragments/header"></header>
+<h1>Car List</h1>
+<ul id="carList"></ul>
+
+<h2>Car Reserve List</h2>
+<ul id="reserveList"></ul>
+
+<script>
+    // Dummy car data
+    var cars = [
+        { make: "Toyota", model: "Camry", year: 2022, color: "Blue" },
+        { make: "Honda", model: "Accord", year: 2023, color: "Red" },
+        { make: "Ford", model: "Mustang", year: 2021, color: "Yellow" },
+        { make: "Chevrolet", model: "Camaro", year: 2022, color: "Black" },
+        { make: "BMW", model: "X5", year: 2023, color: "White" },
+        { make: "Mercedes-Benz", model: "E-Class", year: 2022, color: "Silver" },
+        { make: "Audi", model: "A4", year: 2021, color: "Gray" },
+        { make: "Lexus", model: "RX 350", year: 2023, color: "Green" },
+        { make: "Tesla", model: "Model 3", year: 2022, color: "Blue" },
+        { make: "Nissan", model: "Altima", year: 2021, color: "Red" }
+    ];
+
+    // Generate car list
+    var carList = document.getElementById("carList");
+    var reserveList = document.getElementById("reserveList");
+
+    for (var i = 0; i < cars.length; i++) {
+        var car = cars[i];
+        var carItem = document.createElement("li");
+        carItem.classList.add("carItem");
+        carItem.textContent = "Make: " + car.make + ", Model: " + car.model + ", Year: " + car.year + ", Color: " + car.color;
+
+        // Add click event listener to select/deselect car
+        carItem.addEventListener("click", function() {
+            this.classList.toggle("selected");
+        });
+
+        carList.appendChild(carItem);
+    }
+
+    // Add selected cars to reserve list
+    var addToReserveButton = document.createElement("button");
+    addToReserveButton.textContent = "Add Selected Cars to Reserve";
+    addToReserveButton.classList.add("button");
+
+    addToReserveButton.addEventListener("click", function() {
+        var selectedCars = document.querySelectorAll(".carItem.selected");
+        for (var i = 0; i < selectedCars.length; i++) {
+            var selectedCar = selectedCars[i];
+            var reserveItem = document.createElement("li");
+            reserveItem.textContent = selectedCar.textContent;
+        }
+        reserveList.appendChild(reserveItem);
+    });
+
+    document.body.appendChild(addToReserveButton);
+</script>
+
+<footer th:replace="public/fragments/footer"></footer>
+</body>
+</html>

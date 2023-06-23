@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="public/fragments/head-elements :: headElements"></head>
+    <title>CarGoGo Car Rental System - Home</title>
+</head>
+<body>
+    <div th:replace="public/fragments/header :: header"></div>
+    <div id="mainContainer" class="container">
+        <h3>Welcome to the CarGoGo Car Rental System</h3>
+        <hr/>
+        <div class= "form-group">
+            <form>
+                <fieldset>
+
+                   <div><legend style="font-size: 1.5em;">Search for a Car</legend> </div>
+                    <div><label style="font-size: 1.5em;">Pick Up Location</label></div>
+                    <div> <input type="text"> </div>
+                   <div> <label style="font-size: 1.5em;">Drop Off Location</label></div>
+                   <div> <input type="text"> </div>
+                    <div><label style="font-size: 1.5em;">Pick Up Date</label></div>
+                    <div><input type="date"> </div>
+                    <div><label style="font-size: 1.5em;">Drop Off Date</label></div>
+                   <div> <input type="date"> </div>
+                    <br>
+                    <div><a href="/cars" class="btn btn-primary btn-lg"> Search</a> </div>
+<br>
+                </fieldset>
+
+            </form>
+
+
+        </div>
+
+        <p>
+            <a href="/cars/cardisplay" class="btn btn-primary btn-lg">Browse Cars</a>
+        </p>
+    </div>
+<br>
+<br>
+    <div th:replace="public/fragments/footer :: footer"></div>
+</body>
+</html>

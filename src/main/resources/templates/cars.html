@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="public/fragments/header"></header>
+<div class ="container">
+    <div class ="row">
+        <br>
+
+        <h1>List Of Customers </h1>
+    </div>
+    <div class="row"> <a th:href="@{cars/addcars}" class="btn btn-primary btn-sm-mb-3">Add Car</a></div>
+    <br>
+    <div class="row">
+        <a th:href="@{/cars/rental}" class="btn btn-primary">Rent Car</a>
+
+
+    </div>
+
+
+    <br/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Make</th>
+            <th scope="col">Model</th>
+            <th scope="col">color</th>
+            <th scope="col">year</th>
+            <th scope="col">available</th>
+            <th scope="col">Action</th>
+
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="cars: ${cars}">
+            <td th:text="${cars.id}"></td>
+            <td th:text="${cars.make}"></td>
+            <td th:text="${cars.model}"></td>
+            <td th:text="${cars.color}"></td>
+            <td th:text="${cars.year}"></td>
+            <td th:text="${cars.available}"></td>
+            <td>
+                <a th:href="@{/cars/edit/{id}(id=${cars.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/cars/delete/{id}(id=${cars.id})}" class="btn btn-danger">Delete</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <footer th:replace="public/fragments/footer"></footer>
+</div>
+</body>
+</html>

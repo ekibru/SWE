@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rent Car</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button.delete {
+            background-color: #f44336;
+        }
+        .button.update {
+            background-color: #2196F3;
+        }
+        #checkoutButton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #checkoutMessage {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.3/cerulean/bootstrap.min.css"
+          integrity="sha512-CVn5BJ6vue0EG9CDO6yfg3hOvzQ43xEXOSUEkUtiV3pDy2S7O0saUZ0vbDkZYVX30NvqLLZo51JBzUyreGyqvg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<header th:replace="public/fragments/header"></header>
+<h1>Car Rental List</h1>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody id="carList">
+    </tbody>
+</table>
+
+<h2>Rented Cars</h2>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody id="rentedCarList">
+
+    </tbody>
+</table>
+
+<button id="checkoutButton" onclick="checkout()">Checkout</button>
+
+<p id="checkoutMessage" style="display: none;">Checkout Successful!</p>
+
+<div id="rentalHistory" style="display: none;">
+    <h2>Rental History</h2>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
+
+        </tr>
+        </thead>
+        <tbody id="rentalHistoryTableBody">
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    // Dummy car data
+    var cars = [
+        { make: "Toyota", model: "Camry", year: 2022, color: "Blue" },
+        { make: "Honda", model: "Accord", year: 2023, color: "Red" },
+        { make: "Ford", model: "Mustang", year: 2021, color: "Yellow" },
+        { make: "Chevrolet", model: "Camaro", year: 2022, color: "Black" },
+        { make: "BMW", model: "X5", year: 2023, color: "White" },
+        { make: "Mercedes-Benz", model: "E-Class", year: 2022, color: "Silver" },
+        { make: "Audi", model: "A4", year: 2021, color: "Gray" },
+        { make: "Lexus", model: "RX 350", year: 2023, color: "Green" },
+        { make: "Tesla", model: "Model 3", year: 2022, color: "Blue" },
+        { make: "Nissan", model: "Altima", year: 2021, color: "Red" }
+    ];
+
+    var rentedCars = [];
+
+    // Generate car list
+    var carList = document.getElementById("carList");
+
+
+    for (var i = 0; i < cars.length; i++) {
+        var car = cars[i];
+        var row = document.createElement("tr");
+
+        var makeCell = document.createElement("td");
+        makeCell.textContent = car.make;
+        row.appendChild(makeCell);
+
+        var modelCell = document.createElement("td");
+        modelCell.textContent = car.model;
+        row.appendChild(modelCell);
+
+        var yearCell = document.createElement("td");
+        yearCell.textContent = car.year;
+        row.appendChild(yearCell);
+
+        var colorCell = document.createElement("td");
+        colorCell.textContent = car.color;
+        row.appendChild(colorCell);
+
+        var optionsCell = document.createElement("td");
+        var rentButton = createButton("Rent", "button rent", rentCar.bind(null, car));
+        optionsCell.appendChild(rentButton);
+        row.appendChild(optionsCell);
+
+        var updateButton = createButton("Update", "button update", updateCar.bind(null, i));
+        optionsCell.appendChild(updateButton);
+        row.appendChild(optionsCell);
+
+        // var deleteButton1 = createButton("Delete", "button delete", deleteCar.bind(null, i));
+        // optionsCell.appendChild(deleteButton1);
+        // row.appendChild(optionsCell);
+
+        carList.appendChild(row);
+    }
+
+    // Generate rented car list
+    var rentedCarList = document.getElementById("rentedCarList");
+
+    function rentCar(car) {
+        rentedCars.push(car);
+        updateRentedCarList();
+    }
+    function updateCar(index) {
+        var updatedCar = prompt("Enter updated car information (make, model, year, color)", JSON.stringify(cars[index]));
+        if (updatedCar) {
+            car[index] = JSON.parse(updatedCar);
+            updateCarList();
+        }
+    }
+
+    function deleteCar(index) {
+        car.splice(index, 0);
+        updateCarList();
+    }
+
+    function deleteRentedCar(index) {
+        rentedCars.splice(index, 1);
+        updateRentedCarList();
+    }
+
+    function updateRentedCar(index) {
+        var updatedCar = prompt("Enter updated car information (make, model, year, color)", JSON.stringify(rentedCars[index]));
+        if (updatedCar) {
+            rentedCars[index] = JSON.parse(updatedCar);
+            updateRentedCarList();
+        }
+    }
+
+    function updateRentedCarList() {
+        rentedCarList.innerHTML = "";
+
+        for (var i = 0; i < rentedCars.length; i++) {
+            var car = rentedCars[i];
+            var row = document.createElement("tr");
+
+            var makeCell = document.createElement("td");
+            makeCell.textContent = car.make;
+            row.appendChild(makeCell);
+
+            var modelCell = document.createElement("td");
+            modelCell.textContent = car.model;
+            row.appendChild(modelCell);
+
+            var yearCell = document.createElement("td");
+            yearCell.textContent = car.year;
+            row.appendChild(yearCell);
+
+            var colorCell = document.createElement("td");
+            colorCell.textContent = car.color;
+            row.appendChild(colorCell);
+
+            var optionsCell = document.createElement("td");
+            var deleteButton = createButton("Delete", "button delete", deleteRentedCar.bind(null, i));
+            optionsCell.appendChild(deleteButton);
+            var updateButton = createButton("Update", "button update", updateRentedCar.bind(null, i));
+            optionsCell.appendChild(updateButton);
+            row.appendChild(optionsCell);
+
+
+
+            rentedCarList.appendChild(row);
+
+
+
+        }
+    }
+
+    function createButton(text, className, onClick) {
+        var button = document.createElement("button");
+        button.textContent = text;
+        button.className = className;
+        button.addEventListener("click", onClick);
+        return button;
+    }
+
+    function checkout() {
+        var checkoutButton = document.getElementById("checkoutButton");
+        var checkoutMessage = document.getElementById("checkoutMessage");
+
+        checkoutButton.style.display = "none";
+        checkoutMessage.style.display = "block";
+        var rentalHistory = document.getElementById("rentalHistory");
+        rentalHistory.style.display = "block";
+
+    }
+    var rentalHistoryTable = document.getElementById("rentalHistoryTable");
+    var selectedCar = carList.querySelector("tr.selected");
+
+    if (selectedCar) {
+        // Add the selected car to the rented cars list
+        rentedCars.push(selectedCar);
+
+        // Create a new row in the rental history table for the rented car
+        var newRow = document.createElement("tr");
+
+        // Append the car data to the row
+        var make = selectedCar.cells[0].innerHTML;
+        var model = selectedCar.cells[1].innerHTML;
+        var year = selectedCar.cells[2].innerHTML;
+        var color = selectedCar.cells[3].innerHTML;
+
+        newRow.innerHTML = "<td>" + make + "</td><td>" + model + "</td><td>" + year + "</td><td>" + color + "</td>";
+
+        rentalHistoryTable.appendChild(row);
+
+    }
+
+
+        // Dummy rental history data
+    var rentalHistoryData = [
+        { make: "Toyota", model: "Camry", year: 2022, color: "Blue" },
+        { make: "Honda", model: "Accord", year: 2023, color: "Red" },
+        { make: "Ford", model: "Mustang", year: 2021, color: "Yellow" },
+        { make: "Chevrolet", model: "Camaro", year: 2022, color: "Black" },
+        { make: "BMW", model: "X5", year: 2023, color: "White" }
+    ];
+
+    for (var i = 0; i < rentalHistoryData.length; i++) {
+        var car = rentalHistoryData[i];
+        var row = document.createElement("tr");
+
+        var makeCell = document.createElement("td");
+        makeCell.textContent = car.make;
+        row.appendChild(makeCell);
+
+        var modelCell = document.createElement("td");
+        modelCell.textContent = car.model;
+        row.appendChild(modelCell);
+
+        var yearCell = document.createElement("td");
+        yearCell.textContent = car.year;
+        row.appendChild(yearCell);
+
+        var colorCell = document.createElement("td");
+        colorCell.textContent = car.color;
+        row.appendChild(colorCell);
+
+
+    }
+</script>
+<footer th:replace="public/fragments/footer"></footer>
+
+</body>
+</html>
